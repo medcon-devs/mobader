@@ -1,101 +1,164 @@
-import Image from "next/image";
+import { Box, Button, createTheme, Grid, Link, Typography } from "@mui/material";
+import Banner from "./layout/banner";
+import ResponsiveAppBar from "./layout/appBar";
+import themeColor from "./constant/color";
+import CustomMenu from "./layout/menu";
+import TabBar from "./components/TabBar";
+import Footer from "./layout/footer";
+import { useRouter } from 'next/router';
+declare module "@mui/material/Button" {
+  interface ButtonPropsColorOverrides {
+    light: true;
+    dark: true;
+    greyBlack: true;
+    lightBlack: true;
+    yallowdark: true;
+    black: true;
+  }
+}
+declare module "@mui/material/styles" {
+  interface Palette {
+    light: Palette["primary"];
+    greyBlack: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    lightBlack: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    yallowdark: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    black: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+  }
+  interface PaletteOptions {
+    light?: PaletteOptions["primary"];
+    dark?: PaletteOptions["primary"];
+    greyBlack?: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    lightBlack?: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    yallowdark: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+    black: {
+      main: string;
+      light: string;
+      dark: string;
+    };
+  }
+}
+
+const theme = createTheme({
+  typography: {
+    fontFamily: `"Open-Sans", "Helvetica", "Arial", sans-serif`,
+    h1: {
+      "@media (min-width:360px)": {
+        fontSize: "2rem",
+      },
+      "@media (min-width:480px)": {
+        fontSize: "3rem",
+      },
+      "@media (min-width:600px)": {
+        fontSize: "5em",
+      },
+    },
+    h2: {
+      "@media (min-width:360px)": {
+        fontSize: "1.5rem",
+      },
+      "@media (min-width:480px)": {
+        fontSize: "2rem",
+      },
+      "@media (min-width:600px)": {
+        fontSize: "4em",
+      },
+    },
+    h3: {
+      "@media (min-width:360px)": {
+        fontSize: "1.5rem",
+      },
+      "@media (min-width:480px)": {
+        fontSize: "1.5rem",
+      },
+      "@media (min-width:600px)": {
+        fontSize: "3em",
+      },
+    },
+    h6: {
+      "@media (min-width:360px)": {
+        fontSize: "1rem",
+      },
+      "@media (min-width:480px)": {
+        fontSize: "1rem",
+      },
+      "@media (min-width:600px)": {
+        fontSize: "1.2em",
+      },
+    },
+    subtitle1: {
+      "@media (min-width:360px)": {
+        fontSize: "1rem",
+      },
+      "@media (min-width:480px)": {
+        fontSize: "1rem",
+      },
+      "@media (min-width:600px)": {
+        fontSize: "1.2em",
+      },
+    },
+  },
+
+  palette: {
+    primary: themeColor.primary,
+    secondary: themeColor.secondary,
+    light: themeColor.white,
+    dark: themeColor.black,
+    lightBlack: themeColor.lightBlack,
+    greyBlack: themeColor.greyBlack,
+    black: themeColor.black,
+    yallowdark: themeColor.yallowdark,
+    background: {
+      default: "#fdfbf7",
+    },
+  },
+});
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    <Grid width={1} maxWidth={1920} sx={{overflowX: "hidden", }}>
+      <Grid
+        position={"relative"}
+        width={1}
+        sx={{ height: { md: 650, xs: "auto" } }}
+      >
+        <Banner>
+          <ResponsiveAppBar />
+        </Banner>
+      </Grid>
+     <Grid position={"relative"}>
+     
+     <TabBar />
+    
+     <Footer/>
+     </Grid>
+    </Grid>
   );
 }

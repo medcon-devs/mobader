@@ -1,0 +1,139 @@
+
+// import Sponsors from "@/app/components/sponsors/sponsors";
+// import Countdown from "@/app/components/timer/timer";
+// import themeColor from "@/app/constant/color";
+// import { Box, Typography, Grid, Divider } from "@mui/material";
+// import { motion } from "framer-motion";
+// import TabPanel from "../TabPanel/TabPanel";
+
+// interface Card {
+//   id: number;
+//   date: string;
+//   description: string;
+//   image: string;
+//   isactive: boolean;
+// }
+
+// const series: Card[] = [
+//   {
+//     id: 1,
+//     date: "Month 00, 2025",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+//     image: "/static/images/1.png",
+//     isactive: true,
+//   },
+//   {
+//     id: 2,
+//     date: "Month 00, 2025",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+//     image: "/static/images/2.png",
+//     isactive: false,
+//   },
+//   {
+//     id: 3,
+//     date: "Month 00, 2025",
+//     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+//     image: "/static/images/3.png",
+//     isactive: false,
+//   },
+// ];
+
+// export function generateStaticParams() {
+//   return series.map((card) => ({
+//     id: card.id.toString(),
+//   }));
+// }
+
+// export default function ClinicalDetails({ params }: { params: { id: string } }) {
+//   const selectedCard = series.find((e) => e.id === parseInt(params.id));
+
+//   if (!selectedCard) {
+//     return (
+//       <Typography variant="h4" color="error" textAlign="center" mt={5}>
+//         No details available for the selected card.
+//       </Typography>
+//     );
+//   }
+
+//   const now = new Date();
+//   const targetDate = new Date(now.getTime() + 2 * 24 * 60 * 60 * 1000);
+
+//   return (
+//     <motion.div initial="hidden" animate="visible" exit="hidden" variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}>
+//       <Grid container direction="column" width={1} maxWidth={1920}>
+//         {/* Background Image Section */}
+//         <Grid
+//           sx={{
+//             position: "relative",
+//             height: { md: 650, xs: 550 },
+//             backgroundImage: `url(${selectedCard.image})`,
+//             backgroundSize: "cover",
+//             backgroundPosition: "center",
+//             backgroundRepeat: "no-repeat",
+//           }}
+//         >
+//           <Box
+//             sx={{
+//               position: "absolute",
+//               bottom: 20,
+//               left: "50%",
+//               transform: "translateX(-50%)",
+//               zIndex: 10,
+//               width: "100%",
+//               maxWidth: 500,
+//               padding: 2,
+//               textAlign: "center",
+//             }}
+//           >
+//             <Typography
+//               variant="h4"
+//               fontWeight="bold"
+//               color={themeColor.white.main}
+//               sx={{
+//                 textShadow: "2px 2px 4px rgba(0, 0, 0, 0.5)",
+//               }}
+//             >
+//               {selectedCard.description}
+//             </Typography>
+//           </Box>
+//         </Grid>
+
+//         {/* Countdown Timer Section */}
+//         <Box textAlign="center" mt={4}>
+//           <Countdown target={targetDate.toISOString()} />
+//         </Box>
+
+//         {/* Divider Section */}
+//         <Grid container justifyContent="center" alignItems="center" sx={{ mt: 4 }}>
+//           <Box
+//             component="img"
+//             src="/static/images/line.png"
+//             alt="Divider"
+//             sx={{
+//               width: { xs: "80%", sm: "60%", md: "40%" },
+//               objectFit: "contain",
+//               minWidth: 300,
+//               maxWidth: 700,
+//             }}
+//           />
+//           <Divider
+//             sx={{
+//               width: "90%",
+//               borderBottomWidth: 2,
+//               color: themeColor.secondary.dark,
+//               marginBottom: 2,
+//             }}
+//           />
+//         </Grid>
+
+//         {/* TabPanel Section */}
+//         <Grid sx={{ width: "100vw", maxWidth: "1920px" }}>
+//           <TabPanel />
+//         </Grid>
+
+//         {/* Sponsors Section */}
+//         <Sponsors />
+//       </Grid>
+//     </motion.div>
+//   );
+// }

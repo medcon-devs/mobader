@@ -1,8 +1,9 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import { Tabs, Tab, Box, Typography, Divider, Grid } from "@mui/material";
+import { Tabs, Tab, Box, Typography, Divider } from "@mui/material";
 import themeColor from "@/app/constant/color";
 import { motion, AnimatePresence } from "framer-motion";
+import { EventData } from "@/types/props.types";
 
 const TabPanel = (props: { children: React.ReactNode; value: number; index: number }) => {
   const { children, value, index } = props;
@@ -25,18 +26,18 @@ const TabPanel = (props: { children: React.ReactNode; value: number; index: numb
           role="tabpanel"
           id={`simple-tabpanel-${index}`}
           aria-labelledby={`simple-tab-${index}`}
-          style={{ padding: "16px", width: "80%", maxWidth: "1920px" }}
+          style={{ padding: "16px", width: "100%", maxWidth: "1200px", margin: "auto" }}
         >
-          <Typography component="div" variant="body1">
-            {children}
-          </Typography>
+          {children}
         </motion.div>
       )}
     </AnimatePresence>
   );
 };
-
-export default function TabBar() {
+interface tabBarEvent {
+  event: EventData;
+}
+export default function TabBar({event}:tabBarEvent) {
   const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -50,21 +51,30 @@ export default function TabBar() {
   };
 
   return (
-    <Box sx={{ width: "100%", maxWidth: "1920px", margin: "0 auto", justifyItems: "center" }}>
+    <Box sx={{ width: "100%", margin: "auto", textAlign: "center" }}>
       {/* Tabs Section */}
       <motion.div initial="hidden" animate="visible" variants={tabVariants}>
         <Tabs
+          
           value={value}
           onChange={handleChange}
-          variant="scrollable" // Enable scrolling for tabs
-          scrollButtons="auto" // Display scroll buttons automatically
+          variant="scrollable"
+          scrollButtons="auto"
           textColor="primary"
+          
           sx={{
-            display: "flex",
-            justifyContent: { xs: "flex-start", md: "center" },
+            maxWidth: "90%",
+            
+            margin:{ md: "0", xs: "auto" },
+            // alignContent:"center",
+            // alignItems:"center",
+            // justifyContent:"center",
+            // justifyItems:"center",
+            // alignSelf:"center",
+            justifySelf:"center",
             "& .MuiTabs-indicator": {
-              height: "6px", // Adjust thickness
-              backgroundImage: "url('/static/images/smLine.png')", // Path to your image
+              height: "4px",
+              backgroundImage: "url('/static/images/smLine.png')",
               backgroundRepeat: "no-repeat",
               backgroundSize: "contain",
               backgroundColor: "transparent",
@@ -73,14 +83,12 @@ export default function TabBar() {
               textTransform: "capitalize",
               fontWeight: "bold",
               fontSize: "16px",
-              margin: { xs: "0 6px", sm: "0 16px" }, // Responsive spacing between tabs
-              minWidth: 120, // Prevent squished tabs
+              minWidth: 120,
+              color: themeColor.black.light,
             },
             "& .MuiTab-root.Mui-selected": {
               color: themeColor.black.dark,
             },
-            paddingX: { xs: 2, md: 0 }, // Add padding for mobile
-            overflowX: "auto", // Allow horizontal scrolling
           }}
         >
           <Tab label="Overview" />
@@ -89,54 +97,47 @@ export default function TabBar() {
           <Tab label="Scientific Program" />
         </Tabs>
       </motion.div>
+
       <Divider
         sx={{
           width: "90%",
+          margin: "auto",
           color: themeColor.secondary.dark,
-          scale: 1,
           borderBottomWidth: "2px",
-          maxWidth: "1920px",
-          marginBottom: 2, // Add some spacing below the divider
+          marginBottom: 2,
         }}
         orientation="horizontal"
       />
+
       {/* Tab Panels */}
       <TabPanel value={value} index={0}>
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Learning Objectives
+        <Typography variant="h5" fontWeight="bold" gutterBottom textAlign={"left"}>
+          {event?.overview.title}
         </Typography>
-        <Typography>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-          exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-          dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-          mollit anim id est laborum.
-        </Typography>
+        <Typography textAlign={"left"} dangerouslySetInnerHTML={{ __html: event?.overview.description.replace(/\n/g, "<br>"), }}/ >
+     
+
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Accreditation
+        <Typography variant="h5" fontWeight="bold" gutterBottom textAlign={"left"}>
+        {event?.accreditation.title}
         </Typography>
-        <Typography>
-          Accreditation details go here. This is where you'll provide the relevant information.
-        </Typography>
+        <Typography textAlign={"left"} dangerouslySetInnerHTML={{ __html: event?.accreditation.description.replace(/\n/g, "<br>"), }}/ >
+
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Faculty
+        <Typography variant="h5" fontWeight="bold" gutterBottom textAlign={"left"}>
+        {event?.faculty.title}
         </Typography>
-        <Typography>
-          Faculty information will be displayed here. Add details about the faculty members.
-        </Typography>
+        <Typography textAlign={"left"} dangerouslySetInnerHTML={{ __html: event?.faculty.description.replace(/\n/g, "<br>"), }}/ >
+
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Typography variant="h5" fontWeight="bold" gutterBottom>
-          Scientific Program
+        <Typography variant="h5" fontWeight="bold" gutterBottom textAlign={"left"}>
+        {event?.scientific_program.title}
         </Typography>
-        <Typography>
-          The Scientific Program details go here. Outline the program schedule and highlights.
-        </Typography>
+        <Typography textAlign={"left"} dangerouslySetInnerHTML={{ __html: event?.scientific_program.description.replace(/\n/g, "<br>"), }}/ >
+
       </TabPanel>
     </Box>
   );

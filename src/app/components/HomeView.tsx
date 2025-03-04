@@ -66,8 +66,6 @@ import { Grid } from "@mui/material";
 import { motion } from "framer-motion";
 import DirectorMessage from "./Home/DirectorMessage";
 import ShouldAttend from "./Home/attends";
-import DummySpace from "./Home/dummySpeace";
-import Footer from "../layout/footer";
 import Sponsors from "./sponsors/sponsors";
 
 export default function HomeView() {

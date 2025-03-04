@@ -2,8 +2,7 @@ import { themeColor } from "@/app/constant/color";
 import { routeConfig } from "@/app/constant/route";
 import { get } from "@/handler/api.handler";
 import { MessageType } from "@/types/props.types";
-import { Typography, Card, CardContent, Box } from "@mui/material";
-import { useRouter } from "next/router";
+import { Typography,CardContent, Box } from "@mui/material";
 import { useState, useEffect } from "react";
 import { ClipLoader } from "react-spinners";
 export default function DirectorMessage() {

@@ -5,6 +5,7 @@ const instance = axios.create({
 });
 
 type ResponseType = {
+  [x: string]: any;
   status: boolean;
   message: string;
   status_code: number;
@@ -33,6 +34,7 @@ const get = async (
       },
     });
   } catch (error) {
+    console.log(error)
     return null;
   }
   return res?.data;
@@ -57,9 +59,9 @@ const post = async (
       },
     });
   } catch (error) {
+    console.log(error)
     return null;
   }
-
   return res?.data;
 };
 
@@ -81,6 +83,7 @@ const put = async (
       },
     });
   } catch (error) {
+    console.log(error)
     return null;
   }
 
@@ -104,6 +107,7 @@ const multipart = async (
       },
     });
   } catch (error) {
+    console.log(error)
     return null;
   }
   return res?.data;
@@ -126,6 +130,7 @@ const destroy = async (
       },
     });
   } catch (error) {
+    console.log(error)
     return null;
   }
   return res?.data;

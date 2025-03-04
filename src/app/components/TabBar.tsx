@@ -1,31 +1,23 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Grid, Button, Box } from "@mui/material";
 import HomeView from "./HomeView";
 import ClinicalView from "./ClinicalView";
 import themeColor from "../constant/color";
-import { useSearchParams, useRouter } from "next/navigation";
 
-export default function TabBar() {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  // Read the current tab state from query parameters or default to "home"
-  const [activeTab, setActiveTab] = useState(
-    searchParams.get("tab") || "home"
-  );
-
-  // Update the query parameter on tab change
+export default function TabBar({
+  activeTab,
+  setActiveTab,
+}: {
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+}) {
   const handleTabChange = (tab: string) => {
     setActiveTab(tab);
-    router.push(`/?tab=${tab}`, { shallow: true } as any); // Update the URL without a full reload
+    window.history.pushState(null, "", `/?tab=${tab}`); // Update the URL manually
   };
 
-  useEffect(() => {
-    // Update activeTab when the URL changes (browser back/forward buttons)
-    setActiveTab(searchParams.get("tab") || "home");
-  }, [searchParams]);
 
   return (
     <div>

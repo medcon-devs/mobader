@@ -5,10 +5,7 @@ import ClinicalCards from "../series/cards";
 
 
 
-export default function ClinicalView({
-
-}: {
-}) {
+export default function ClinicalView() {
   // Animation Variants for Transition
   const variants = {
     hidden: { opacity: 0, x: 100 }, // Start off-screen to the right

@@ -13,6 +13,7 @@ function Footer() {
       height={80}
       padding={"0px 40px"}
       width={"100%"}
+      maxWidth={1920}
       sx={{ backgroundColor: themeColor.black.dark }}
       display={"flex"}
       justifyContent={"space-between"}

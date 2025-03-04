@@ -1,6 +1,3 @@
-import { orange, purple } from "@mui/material/colors";
-import { dark, light } from "@mui/material/styles/createPalette";
-
 export const themeColor = {
   primary: {
     main: "#052184",

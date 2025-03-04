@@ -6,7 +6,8 @@ export default function Sponsors() {
       display="flex"
       alignItems="center"
       justifyContent="center"
-      sx={{ width: "100%", padding: "60px 60px" }}
+      sx={{ width: "100%", padding: "160px 60px" }}
+      
     >
       {/* Left Line */}
       <Box
